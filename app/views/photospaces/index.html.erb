@@ -1,0 +1,34 @@
+<h1>Photospace: Nowoczesna galeria</h1>
+<div id="user_nav">
+  <% if logged_in? %>
+    <%= link_to "Edit Profile", edit_user_path(current_user.login) %> |
+    <%= link_to "Logout", logout_path %>
+  <% else %>
+    <%= link_to "Register", new_user_path %> |
+    <%= link_to "Login", login_path %>
+  <% end %>
+
+</div>
+
+
+
+
+<% @photospaces.each do |photospace| %>
+  <tr>
+    <td><%= image_tag photospace.photo.url(:thumb) %></td><br>
+    <td><b>Autor</b><br><%=h photospace.autor %></td><br>
+    <td><b>Komentarz</b><br><%=h photospace.komentarz %></td><br>
+    <td><%= link_to 'Pokaz', photospace %></td>
+    <% if logged_in? %>
+    <td><%= link_to 'Edytuj', edit_photospace_path(photospace) %></td>
+    <td><%= link_to 'Usun', photospace, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
+    <br>
+  </tr>
+<% end %>
+
+
+<br />
+<% if logged_in? %>
+<%= link_to 'Dodaj Zdjecie', new_photospace_path %>
+<% end %>

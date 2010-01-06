@@ -1,0 +1,18 @@
+<p><%= image_tag @photospace.photo.url(:small) %></p>
+
+
+<p>
+  <b>Autor:</b>
+  <%=h @photospace.autor %>
+</p>
+
+<p>
+  <b>Komentarz:</b>
+  <%=h @photospace.komentarz %>
+</p>
+
+
+<% if logged_in? %>
+<%= link_to 'Edytuj', edit_photospace_path(@photospace) %> |
+<% end %>
+<%= link_to 'Powrot', photospaces_path %>
