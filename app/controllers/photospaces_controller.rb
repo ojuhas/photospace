@@ -1,4 +1,4 @@
-class PhotospacesController < ApplicationController
+ class PhotospacesController < ApplicationController
 before_filter :load_photospace, :only => [:edit, :update, :destroy, :show]
 access_control do
   allow all, :to => [:index, :show]
@@ -7,26 +7,18 @@ access_control do
   allow :owner, :of => :photospace, :to => [:edit, :update, :destroy]
 end
 
-
-
-
-
   # GET /photospaces
   # GET /photospaces.xml
   def index
-    @photospaces = Photospace.all
+    @search = Photospace.search(params[:search])
+    @photospaces = @search.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @photospaces }
-    end
   end
   
   # GET /photospaces/1
   # GET /photospaces/1.xml
   def show
     @photospace = Photospace.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @photospace }
@@ -54,18 +46,16 @@ end
   def create
     @photospace = Photospace.new(params[:photospace])
 
-    respond_to do |format|
+    
       if @photospace.save
         flash[:notice] = 'Zdjêcie dodano.'
-        format.html { redirect_to(@photospace) }
-        format.xml  { render :xml => @photospace, :status => :created, :location => @photospace }
-	 current_user.has_role!(:owner, @photospace) # przypisz rolê
+         redirect_to photospaces_path
+        current_user.has_role!(:owner, @photospace) # przypisz rolê
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @photospace.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
+        render :action => 'new' 
+       end
+    
+  end 
 
   # PUT /photospaces/1
   # PUT /photospaces/1.xml
@@ -84,7 +74,7 @@ end
     end
   end
 
-  # DELETE /photospaces/1
+  # DELETE /photospaces/1 
   # DELETE /photospaces/1.xml
   def destroy
     @photospace = Photospace.find(params[:id])

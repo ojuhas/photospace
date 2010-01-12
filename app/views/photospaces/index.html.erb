@@ -1,34 +1,66 @@
-<h1>Photospace: Nowoczesna galeria</h1>
+<div class="container">
+<div class="column2" id="corner">
+
+</div>
+<div class="column0 last" id="naglowek">
 <div id="user_nav">
   <% if logged_in? %>
+    Jestes zalogowany jako: <%= current_user.login %>  |
     <%= link_to "Edit Profile", edit_user_path(current_user.login) %> |
     <%= link_to "Logout", logout_path %>
-  <% else %>
+  <% else %>  
     <%= link_to "Register", new_user_path %> |
     <%= link_to "Login", login_path %>
   <% end %>
 
+</div>  
 </div>
 
 
-
-
-<% @photospaces.each do |photospace| %>
+<center>
+<div class="column2" id="menu"> 
+<b>Wyszukiwanie:</b><br>
+<% form_for @search do |f| %>
+   <p>
+	<%= f.label :autor_like, "Autor" %><br />
+	<%= f.text_field :autor_like %>
+   </p> 
+   <p>
+	<%= f.label :kategoria_id_equals, "Kategoria" %><br />
+	<%= f.collection_select :kategoria_id_equals, Kategoria.find(:all), :id, :name, :include_blank => true  %>
+   </p>
+   <p>
+	<%= f.label :komentarz_like, "Opis" %><br />
+	<%= f.text_field :komentarz_like %>
+   </p>
+   <p>
+    	<%= f.submit "Szukaj" %>
+   </p>
+<% end %>
+</div>
+<div class="column1 last" id="reszta">
+<div class="column3">
+<% for photospace in @photospaces %>
   <tr>
-    <td><%= image_tag photospace.photo.url(:thumb) %></td><br>
-    <td><b>Autor</b><br><%=h photospace.autor %></td><br>
-    <td><b>Komentarz</b><br><%=h photospace.komentarz %></td><br>
-    <td><%= link_to 'Pokaz', photospace %></td>
-    <% if logged_in? %>
-    <td><%= link_to 'Edytuj', edit_photospace_path(photospace) %></td>
-    <td><%= link_to 'Usun', photospace, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end %>
-    <br>
+    <div class="column4"><td><h3><%= photospace.komentarz %></h3></td></div><hr>
+    <td><%= link_to (image_tag photospace.photo.url(:small)), photospace %><br></td>
+   <td>Autor:
+        <%=  photospace.autor %><br></td>
+<hr><br>
   </tr>
+
 <% end %>
 
 
 <br />
 <% if logged_in? %>
 <%= link_to 'Dodaj Zdjecie', new_photospace_path %>
+
+<br>
+
 <% end %>
+</div>
+</center>
+
+</div>
+</div>

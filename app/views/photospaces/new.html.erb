@@ -1,3 +1,27 @@
+<div class="container">
+<div class="column2" id="corner">
+
+</div>
+<div class="column0 last" id="naglowek">
+<div id="user_nav">
+  <% if logged_in? %>
+    Jestes zalogowany jako: <%= current_user.login %>  |
+    <%= link_to "Edit Profile", edit_user_path(current_user.login) %> |
+    <%= link_to "Logout", logout_path %>
+  <% else %>  
+    <%= link_to "Register", new_user_path %> |
+    <%= link_to "Login", login_path %>
+  <% end %>
+
+</div>  
+</div>
+
+
+<center>
+<div class="column2" id="menu"> 
+<%= link_to 'Photospace', photospaces_path %>
+</div>
+<div class="column1 last" id="reszta">
 <h1>Nowe Zdjecie</h1>
 
 <% form_for(@photospace, :html => { :multipart => true }) do |f| %>
@@ -12,12 +36,22 @@
     <%= f.text_field :autor %>
   </p>
   <p>
-    <%= f.label :komentarz %><br />
-    <%= f.text_area :komentarz %>
+    <%= f.label :Opis %><br />
+    <%= f.collection_select :kategoria_id, Kategoria.find(:all), :id, :name, :prompt => "Wybierz kategorie" %>
   </p>
   <p>
+    <%= f.label :Opis %><br /> 
+    <%= f.text_field :komentarz %>
+  </p>
+  <p>
+
     <%= f.submit 'Dodaj' %>
   </p>
 <% end %>
 
 <%= link_to 'Powrot', photospaces_path %>
+
+</center>
+
+</div>
+</div>

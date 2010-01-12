@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  photospace_id: 1
+  body: MyText
+  podpis: MyString
+
+two:
+  photospace_id: 1
+  body: MyText
+  podpis: MyString

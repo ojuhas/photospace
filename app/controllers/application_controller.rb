@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
-helper_method :current_user, :logged_in?
+helper_method :current_user, :logged_in?, :owner?
 rescue_from 'Acl9::AccessDenied', :with => :access_denied
 private
 
@@ -23,9 +23,11 @@ end
 
 # to samo co current_user ale kod czytelniejszy
 def logged_in?
-  current_user != nil
+  current_user != nil 
 end
-
+def owner?
+ current_user == owner
+end
 # metoda wykorzystana w require_user i require_no_user
 def store_location
   session[:return_to] = request.request_uri
@@ -62,19 +64,21 @@ def require_user
   end
 end
 
-
+ 
 filter_parameter_logging :password, :password_confirmation
 
 
 
 def access_denied
     if current_user
-      render :template => 'home/access_denied'
+      redirect_to photospaces_path
+      
     else
       flash[:notice] = 'Access denied. Try to log in first.'
       redirect_to login_path
     end
   end
+
 
 
 end

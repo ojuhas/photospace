@@ -3,7 +3,7 @@ class CreatePhotospaces < ActiveRecord::Migration
     create_table :photospaces do |t|
       t.string :autor
       t.text :komentarz
-
+      t.integer :kategoria_id
       t.timestamps
     end
   end

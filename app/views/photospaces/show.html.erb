@@ -1,18 +1,67 @@
-<p><%= image_tag @photospace.photo.url(:small) %></p>
+<div class="container">
+<div class="column2" id="corner">
+
+</div>
+<div class="column0 last" id="naglowek">
+<div id="user_nav">
+  <% if logged_in? %>
+    Jestes zalogowany jako: <%= current_user.login %>  |
+    <%= link_to "Edit Profile", edit_user_path(current_user.login) %> |
+    <%= link_to "Logout", logout_path %>
+  <% else %>  
+    <%= link_to "Register", new_user_path %> |
+    <%= link_to "Login", login_path %>
+  <% end %>
+
+</div>  
+</div>
 
 
-<p>
+<center>
+<div class="column2" id="menu"> 
+<%= link_to 'Photospace', photospaces_path %>
+</div>
+<div class="column1 last" id="reszta">
+<div class="column3">
+<p><%= image_tag @photospace.photo.url %></p>
+<p> 
   <b>Autor:</b>
   <%=h @photospace.autor %>
 </p>
+<p>
+  <b>Kategoria:</b>
+  <%=h @photospace.kategoria.name %>
+</p> 
 
 <p>
-  <b>Komentarz:</b>
+  <b>Opis:</b>
   <%=h @photospace.komentarz %>
 </p>
 
-
+ 
 <% if logged_in? %>
 <%= link_to 'Edytuj', edit_photospace_path(@photospace) %> |
+<%= link_to "Usun", photospace_path(@photospace), :method => :delete, :confirm => "Are you sure?" %>
+<% end %> 
+
+<h2>Komentarze</h2>
+<%= render :partial => @photospace.wpisy %>
+<% if logged_in? %>
+<% form_for [@photospace, Wpis.new] do |f| %>
+ <p>
+  <%= f.label :podpis, "Podpis" %><br />
+  <%= f.text_field :podpis %>
+ </p>
+ <p>
+    <%= f.label :body, "Nowy Komentarz" %><br />
+    <%= f.text_area :body %>
+  </p>
+ <p><%= f.submit "Dodaj" %></p>
+<% end %>
 <% end %>
 <%= link_to 'Powrot', photospaces_path %>
+</div>
+</center>
+
+</div>
+</div>

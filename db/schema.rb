@@ -9,11 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091231123850) do
+ActiveRecord::Schema.define(:version => 20100109181303) do
+
+  create_table "kategorias", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "photospaces", :force => true do |t|
     t.string   "autor"
     t.text     "komentarz"
+    t.integer  "kategoria_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "photo_file_name"
@@ -54,5 +61,13 @@ ActiveRecord::Schema.define(:version => 20091231123850) do
 
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["login"], :name => "index_users_on_login"
+
+  create_table "wpisy", :force => true do |t|
+    t.integer  "photospace_id"
+    t.text     "body"
+    t.string   "podpis"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

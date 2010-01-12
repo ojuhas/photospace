@@ -1,3 +1,30 @@
+  <%= stylesheet_link_tag 'scaffold' %>
+    <%= stylesheet_link_tag 'style' %>
+
+<div class="container">
+<div class="column2" id="corner">
+
+</div>
+<div class="column0 last" id="naglowek">
+<div id="user_nav">
+  <% if logged_in? %>
+    Jestes zalogowany jako: <%= current_user.login %>  |
+    <%= link_to "Edit Profile", edit_user_path(current_user.login) %> |
+    <%= link_to "Logout", logout_path %>
+  <% else %>  
+    <%= link_to "Register", new_user_path %> |
+    <%= link_to "Login", login_path %>
+  <% end %>
+
+</div>  
+</div>
+
+
+<center>
+<div class="column2" id="menu"> 
+<%= link_to 'Photospace', photospaces_path %>
+</div>
+<div class="column1 last" id="reszta">
 <% form_for @user do |f| %>
   <%= f.error_messages %>
   <p>
@@ -18,4 +45,9 @@
 </p>
 
   <p><%= f.submit "Submit" %></p>
+<%= link_to 'Powrot', photospaces_path %>
 <% end %>
+</center>
+
+</div>
+</div>

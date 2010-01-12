@@ -1,0 +1,24 @@
+<h1>Listing wpisy</h1>
+
+<table>
+  <tr>
+    <th>Photospace</th>
+    <th>Body</th>
+    <th>Podpis</th>
+  </tr>
+
+<% @wpisy.each do |wpis| %>
+  <tr>
+    <td><%=h wpis.photospace_id %></td>
+    <td><%=h wpis.body %></td>
+    <td><%=h wpis.podpis %></td>
+    <td><%= link_to 'Show', wpis %></td>
+    <td><%= link_to 'Edit', edit_wpis_path(wpis) %></td>
+    <td><%= link_to 'Destroy', wpis, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New wpis', new_wpis_path %>

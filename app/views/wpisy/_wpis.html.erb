@@ -1,0 +1,13 @@
+<% div_for wpis do %>
+<p>
+ <hr id="krotki">
+ <strong>Komentarz dodany przez: <%= h(wpis.podpis) %></strong><br />
+ <hr>
+  <%= h(wpis.body) %>
+<hr> 
+<% if logged_in? %>
+<%= link_to "Usun", photospace_wpis_path(@photospace, wpis), :method => :delete, :confirm => "Are you sure?" %>
+<% end %>
+<hr id="krotki">
+</p>
+<% end %> 

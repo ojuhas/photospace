@@ -1,0 +1,2 @@
+module WpisyHelper
+end
