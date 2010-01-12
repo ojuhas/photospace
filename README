@@ -5,7 +5,7 @@ Jej g³ównym celem dodawanie, przegl¹danie oraz usuwanie zdjêæ pod wzglêdem u¿ytk
 Aplikacja zak³ada te¿ wyszukiwanie zdjêæ pod wzglêdem tematycznym, na zasadzie s³ów kluczowych.
 Umo¿liwia tak¿e dodawanie komentarzy pod ka¿dym z dodanych zdjêæ.
 Nad ca³oœci¹ us³ugi bêdzie czuwa³ admin, który bêdzie mia³ wszelkie prawa dostêpu do kont edycji ect.
-Spo³ecznoœæ serwisu bêdzie mia³a mo¿liwosc oceny zdjêæ
+
 
 Lista wykorzystanych w projekcie wtyczek, gemów:
 
